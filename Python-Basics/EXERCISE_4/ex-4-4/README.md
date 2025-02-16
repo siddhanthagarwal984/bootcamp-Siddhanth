@@ -1,0 +1,1 @@
+Explains caching and function optimization using memoize.

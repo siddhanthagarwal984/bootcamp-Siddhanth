@@ -1,0 +1,30 @@
+[project]
+name = "ex-1-3"
+version = "0.1.0"
+description = ""
+authors = [
+    {name = "siddhanthagarwal984",email = "siddhanthagarwal984@gmail.com"}
+]
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "typer (>=0.15.1,<0.16.0)"
+]
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+
+[tool.poetry]
+name = "hello-cli"
+version = "0.1.0"
+description = "A simple CLI that greets users"
+authors = ["Your Name <you@example.com>"]
+license = "MIT"
+
+
+[tool.poetry.scripts]
+hello = "main:app"
+

@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "hello-config"
+version = "0.1.1"  # Updated version for logging feature
+description = "A greeting library with YAML config and logging"
+authors = ["Your Name <you@example.com>"]
+license = "MIT"
+readme = "README.md"
+packages = [{include = "hello"}]
+
+[tool.poetry.dependencies]
+python = "^3.12"
+pyyaml = "^6.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

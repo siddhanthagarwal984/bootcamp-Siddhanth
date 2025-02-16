@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "many-hellos"
+version = "0.1.0"
+description = "A CLI that says hello to multiple people with logging"
+authors = ["Your Name <you@example.com>"]
+license = "MIT"
+readme = "README.md"
+packages = [{include = "many_hellos"}]
+
+
+[tool.poetry.dependencies]
+python = "^3.12"
+typer = "^0.9.0"
+hello-config = "^0.1.1"  # Make sure to install the library first
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

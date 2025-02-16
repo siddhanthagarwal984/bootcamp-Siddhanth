@@ -1,0 +1,1 @@
+Describes how prefix_printer works with a custom string.

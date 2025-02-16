@@ -1,0 +1,1 @@
+Explains how role_required controls access to functions.

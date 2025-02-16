@@ -1,0 +1,1 @@
+Describes how retry helps recover from intermittent failures.

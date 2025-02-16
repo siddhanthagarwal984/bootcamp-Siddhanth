@@ -1,0 +1,1 @@
+Explains how the simple_logger decorator works.

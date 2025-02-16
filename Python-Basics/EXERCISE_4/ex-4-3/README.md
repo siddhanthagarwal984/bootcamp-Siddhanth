@@ -1,0 +1,1 @@
+Explains how timer measures function execution time.
