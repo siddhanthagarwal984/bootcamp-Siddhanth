@@ -1,0 +1,25 @@
+# Python bytecode and cache files
+__pycache__/
+*.pyc
+*.pyo
+
+# Virtual environments
+.venv/
+*.egg-info/
+
+# Build artifacts
+build/
+dist/
+
+# IDE and editor configurations
+.vscode/
+.pytest_cache/
+
+# Ignore all project-specific `dist`, `build`, and cache directories
+Iterators-and-Streams/**/dist/
+Iterators-and-Streams/**/build/
+Iterators-and-Streams/**/__pycache__/
+Iterators-and-Streams/**/.pytest_cache/
+Iterators-and-Streams/**/.venv/
+Iterators-and-Streams/**/.vscode/
+Iterators-and-Streams/**/*.egg-info/
