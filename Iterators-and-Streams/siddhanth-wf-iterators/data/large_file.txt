@@ -1,0 +1,4 @@
+Line 1: Some random text
+Line 2: Another log entry
+...
+Line 100000: End of file

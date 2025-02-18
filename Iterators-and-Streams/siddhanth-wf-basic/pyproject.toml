@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "siddhanth-wf-basic"
+version = "0.2.0"
+description = "Basic text processing package"
+authors = ["siddhanthagarwal984 <siddhanthagarwal984@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+typer = {extras = ["all"], version = "^0.6.1"}
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+
+[tool.poetry.scripts]
+basic = "siddhanth_wf_basic.commands:app"
