@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "ex-1-7"
+version = "0.1.0"
+description = "Fetch SpaceX launch details using GraphQL."
+authors = ["siddhanthagarwal984 <siddhanthagarwal984@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+gql = "^3.5.0"
+requests = "^2.32.3"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

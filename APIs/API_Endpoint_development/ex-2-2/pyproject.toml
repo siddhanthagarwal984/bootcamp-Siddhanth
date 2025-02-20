@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "ex-2-2"
+version = "0.1.0"
+description = "Basic Authentication in FastAPI"
+authors = ["siddhanthagarwal984 <siddhanthagarwal984@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+fastapi = "^0.115.8"
+uvicorn = "^0.34.0"
+python-multipart = "^0.0.20"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
