@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transaction Notes</title>
+</head>
+<body>
+    <h1>Transaction Notes</h1>
+    
+    <h2>1. What are transactions?</h2>
+    <p>A transaction is a sequence of database operations that are executed as a single logical unit of work. Transactions ensure data consistency, integrity, and reliability.</p>
+    
+    <h2>2. What are ACID Properties?</h2>
+    <p>ACID stands for Atomicity, Consistency, Isolation, and Durability:</p>
+    <ul>
+        <li><strong>Atomicity</strong>: Ensures that all operations within a transaction either complete fully or not at all.</li>
+        <li><strong>Consistency</strong>: Ensures that a transaction takes the database from one valid state to another.</li>
+        <li><strong>Isolation</strong>: Ensures that transactions do not interfere with each other.</li>
+        <li><strong>Durability</strong>: Ensures that committed transactions are permanently recorded, even in case of a system failure.</li>
+    </ul>
+    
+    <h2>3. Suppose you do not have transactions. Is that system useful? Why?</h2>
+    <p>Without transactions, a system might still function but would be prone to data corruption, inconsistencies, and partial failures. For example, in a banking system, transferring money without transactions could result in deducted amounts without crediting the recipient.</p>
+    
+    <h2>4. What properties does your file system have?</h2>
+    <p>Most modern file systems support consistency mechanisms such as journaling (e.g., ext4, NTFS) to ensure data integrity. They may not strictly follow ACID but provide features like atomic writes and crash recovery.</p>
+    
+    <h2>5. Suppose you do not have "A" (Atomicity) in ACID. What happens? When is it okay?</h2>
+    <p>Without atomicity, partial updates can occur, leading to data corruption. However, in systems where failures are rare and errors can be manually corrected, atomicity might not be critical. Example: A log system where partial writes are acceptable.</p>
+    
+    <h2>6. Suppose you do not have "C" (Consistency) in ACID. What happens? When is it okay?</h2>
+    <p>Without consistency, the database might end up in an invalid state. However, eventual consistency (e.g., in distributed NoSQL databases) allows temporary inconsistencies that resolve over time, making it acceptable in high-availability systems.</p>
+    
+    <h2>7. Suppose you do not have "I" (Isolation) in ACID. What happens? When is it okay?</h2>
+    <p>Without isolation, transactions might interfere with each other, leading to issues like dirty reads or lost updates. In real-time analytics, where immediate availability is more important than strict isolation, this might be acceptable.</p>
+    
+    <h2>8. Suppose you do not have "D" (Durability) in ACID. What happens? When is it okay?</h2>
+    <p>Without durability, committed transactions might be lost after a system crash. However, for in-memory databases or caching layers where persistence is not required, this trade-off might be acceptable.</p>
+</body>
+</html>
