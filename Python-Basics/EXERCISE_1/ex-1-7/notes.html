@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notes for ex-1-7</title>
+</head>
+<body>
+    <h1>Notes for ex-1-7: Enable Logging for many-hellos</h1>
+
+    <h2>1. Understanding of the Problem</h2>
+    <p>
+        The goal is to enable logging in the CLI application `many-hellos`, ensuring that 
+        logs from both the `say_hello` function and `config_loader.py` are visible when the CLI is executed.
+    </p>
+
+    <h2>2. Approach Taken</h2>
+    <ul>
+        <li>Added <code>logging.basicConfig(level=logging.INFO)</code> to <code>cli.py</code>.</li>
+        <li>Ensured logs from both modules appeared when running the CLI.</li>
+    </ul>
+
+    <h2>3. LLMs Used and Their Content</h2>
+    <p>
+        ChatGPT 4 was used to:
+    </p>
+    <ul>
+        <li>Enable logging across modules in a CLI tool.</li>
+        <li>Ensure logs appeared in a clean, readable format.</li>
+    </ul>
+
+    <h2>4. Questions and Answers</h2>
+    <p>
+        <strong>1. How to enable logging for the CLI?</strong><br>
+        Add this to <code>cli.py</code>:
+        <pre>
+import logging
+logging.basicConfig(level=logging.INFO)
+        </pre>
+    </p>
+
+    <p>
+        <strong>2. How to run the CLI and see the logs?</strong><br>
+        Run:
+        <pre>
+python -m many_hellos.cli Alice Bob
+        </pre>
+    </p>
+</body>
+</html>

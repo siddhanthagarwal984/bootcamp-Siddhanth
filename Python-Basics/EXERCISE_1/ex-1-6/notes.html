@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notes for ex-1-6</title>
+</head>
+<body>
+    <h1>Notes for ex-1-6: Adding Logging to say_hello and config_loader</h1>
+
+    <h2>1. Understanding of the Problem</h2>
+    <p>
+        The goal is to add logging to both `say_hello` and `config_loader.py`. 
+        This helps track when configuration files are loaded and when the 
+        `say_hello` function is called.
+    </p>
+
+    <h2>2. Approach Taken</h2>
+    <ul>
+        <li>Used Python's built-in <code>logging</code> library.</li>
+        <li>Added logging at key points: when loading configs and when executing the greeting logic.</li>
+        <li>Configured logging at the <code>INFO</code> level.</li>
+        <li>Tested the logs by running the CLI.</li>
+    </ul>
+
+    <h2>3. LLMs Used and Their Content</h2>
+    <p>
+        ChatGPT 4 was used to:
+    </p>
+    <ul>
+        <li>Understand how to add logging to Python functions.</li>
+        <li>Implement per-module logging for `config_loader.py` and `hello.py`.</li>
+        <li>Ensure logs followed a clean format.</li>
+    </ul>
+
+    <h2>4. Questions and Answers</h2>
+    <p>
+        <strong>1. How to add logging to a Python module?</strong><br>
+        Use:
+        <pre>
+import logging
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
+        </pre>
+    </p>
+
+    <p>
+        <strong>2. How to log config loading?</strong><br>
+        In <code>config_loader.py</code>, I added:
+        <pre>
+logger.info(f"Loading config from {config_path}")
+        </pre>
+    </p>
+
+    <p>
+        <strong>3. How to run the CLI and see the logs?</strong><br>
+        Run:
+        <pre>
+python -m hello.hello
+        </pre>
+    </p>
+</body>
+</html>

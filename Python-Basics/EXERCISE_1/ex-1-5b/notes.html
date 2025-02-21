@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notes for ex-1-5b</title>
+</head>
+<body>
+    <h1>Notes for ex-1-5b: Search YAML in Multiple Paths</h1>
+
+    <h2>1. Understanding of the Problem</h2>
+    <p>
+        The goal is to enhance `say_hello.py` so that it searches for `_config.yaml` in:
+    </p>
+    <ul>
+        <li>The current directory</li>
+        <li>Paths listed in the `CONFIG_PATH` environment variable</li>
+        <li>A default YAML file in the package</li>
+    </ul>
+
+    <h2>2. Approach Taken</h2>
+    <ul>
+        <li>Implemented a search mechanism using `os.environ`.</li>
+        <li>Handled cases where the config file is missing.</li>
+        <li>Tested different scenarios (current directory, environment variable, default file).</li>
+    </ul>
+
+    <h2>3. LLMs Used and Their Content</h2>
+    <p>
+        ChatGPT 4 was used to:
+    </p>
+    <ul>
+        <li>Implement the multi-path search logic efficiently.</li>
+        <li>Handle potential permission and path issues.</li>
+    </ul>
+
+    <h2>4. Questions and Answers</h2>
+    <p>
+        <strong>1. How to read an environment variable in Python?</strong><br>
+        Use:
+        <pre>import os
+path = os.environ.get("CONFIG_PATH")</pre>
+    </p>
+</body>
+</html>

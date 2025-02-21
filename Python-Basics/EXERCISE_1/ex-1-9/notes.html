@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notes for ex-1-9</title>
+</head>
+<body>
+    <h1>Notes for ex-1-9: Selective Logging for config_loader</h1>
+
+    <h2>1. Understanding of the Problem</h2>
+    <p>
+        The goal is to enable logging only for <code>config_loader.py</code> while suppressing logs from other modules.
+    </p>
+
+    <h2>2. Approach Taken</h2>
+    <ul>
+        <li>Used <code>logging.getLogger("hello.config_loader").setLevel(logging.INFO)</code>.</li>
+    </ul>
+
+    <h2>4. Questions and Answers</h2>
+    <p>
+        <strong>1. How to enable selective logging?</strong><br>
+        Use:
+        <pre>
+logging.getLogger("hello.config_loader").setLevel(logging.INFO)
+        </pre>
+    </p>
+
+    <p>
+        <strong>2. How to verify only config logs show?</strong><br>
+        Run:
+        <pre>
+python -m many_hellos.cli Alice
+        </pre>
+        Expect only config loading logs to appear.
+    </p>
+</body>
+</html>

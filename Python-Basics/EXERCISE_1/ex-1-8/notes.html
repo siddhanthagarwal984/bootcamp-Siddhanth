@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notes for ex-1-8</title>
+</head>
+<body>
+    <h1>Notes for ex-1-8: Disable Logging</h1>
+
+    <h2>1. Understanding of the Problem</h2>
+    <p>
+        The goal is to disable logging for `many-hellos`, ensuring that no logs are shown when running the CLI.
+    </p>
+
+    <h2>2. Approach Taken</h2>
+    <ul>
+        <li>Used <code>logging.basicConfig(level=logging.CRITICAL)</code> to suppress logs.</li>
+        <li>Tested the CLI to confirm no logs appeared.</li>
+    </ul>
+
+    <h2>4. Questions and Answers</h2>
+    <p>
+        <strong>1. How to disable logging in Python?</strong><br>
+        Set logging level to CRITICAL:
+        <pre>
+logging.basicConfig(level=logging.CRITICAL)
+        </pre>
+    </p>
+
+    <p>
+        <strong>2. How to test if logs are suppressed?</strong><br>
+        Run:
+        <pre>
+python -m many_hellos.cli Alice Bob
+        </pre>
+        No logs should appear — only the "Hello" messages.
+    </p>
+</body>
+</html>

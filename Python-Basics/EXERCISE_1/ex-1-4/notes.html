@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notes for ex-1-4</title>
+</head>
+<body>
+    <h1>Notes for ex-1-4: many-hellos CLI</h1>
+
+    <h2>1. Understanding of the Problem</h2>
+    <p>
+        The goal is to create a CLI tool that greets multiple names one by one using the `say_hello` 
+        function from the "helloworld" package.
+    </p>
+
+    <h2>2. Approach Taken</h2>
+    <ul>
+        <li>Created a new project <code>many-hellos</code> with Poetry.</li>
+        <li>Imported <code>say_hello</code> from the <code>helloworld</code> package.</li>
+        <li>Implemented a CLI using <code>Typer</code> to accept multiple names.</li>
+        <li>Tested it using:
+            <pre>python -m many_hellos.cli Alice Bob Charlie</pre>
+        </li>
+    </ul>
+
+    <h2>3. LLMs Used and Their Content</h2>
+    <p>
+        ChatGPT 4 was used to:
+    </p>
+    <ul>
+        <li>Ensure proper CLI argument parsing for multiple names.</li>
+        <li>Resolve issues related to package imports across different projects.</li>
+        <li>Test CLI behavior for empty inputs.</li>
+    </ul>
+
+    <h2>4. Questions and Answers</h2>
+    <p>
+        <strong>1. How to pass multiple arguments in Typer?</strong><br>
+        Use:
+        <pre>def main(names: List[str]):</pre>
+    </p>
+    <p>
+        <strong>2. How to test the CLI?</strong><br>
+        Run:
+        <pre>python -m many_hellos.cli Alice Bob Charlie</pre>
+    </p>
+</body>
+</html>

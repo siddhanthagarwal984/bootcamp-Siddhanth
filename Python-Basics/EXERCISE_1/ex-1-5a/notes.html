@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notes for ex-1-5a</title>
+</head>
+<body>
+    <h1>Notes for ex-1-5a: Using Config YAML for num_times</h1>
+
+    <h2>1. Understanding of the Problem</h2>
+    <p>
+        The goal is to extend the `say_hello` function to load a `_config.yaml` file that contains 
+        a parameter called `num_times`. This parameter determines how many times the greeting 
+        should be repeated.
+    </p>
+
+    <h2>2. Approach Taken</h2>
+    <ul>
+        <li>Added a `_config.yaml` file with the `num_times` parameter.</li>
+        <li>Modified `say_hello.py` to read from this config file.</li>
+        <li>Tested by calling the function and verifying the output.</li>
+    </ul>
+
+    <h2>3. LLMs Used and Their Content</h2>
+    <p>
+        ChatGPT 4 was used to:
+    </p>
+    <ul>
+        <li>Understand how to read YAML files in Python.</li>
+        <li>Determine best practices for handling missing config files.</li>
+        <li>Debug file path resolution issues.</li>
+    </ul>
+
+    <h2>4. Questions and Answers</h2>
+    <p>
+        <strong>1. How to load a YAML file in Python?</strong><br>
+        Use:
+        <pre>import yaml
+with open("_config.yaml", "r") as file:
+    config = yaml.safe_load(file)</pre>
+    </p>
+</body>
+</html>
