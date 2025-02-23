@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>notes_stream_processing</title>
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #1e40af;
+            --accent-color: #3b82f6;
+            --text-color: #1f2937;
+            --background-color: #f8fafc;
+            --code-background: #f1f5f9;
+            --border-color: #e2e8f0;
+            --section-background: #ffffff;
+            --highlight-color: #dbeafe;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.7;
+            color: var(--text-color);
+            background-color: var(--background-color);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .section {
+            background: var(--section-background);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            border: 1px solid var(--border-color);
+        }
+
+        h1, h2, h3 {
+            color: var(--primary-color);
+            line-height: 1.3;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            padding-bottom: 1rem;
+            border-bottom: 3px solid var(--accent-color);
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        h2::before {
+            content: "→";
+            color: var(--accent-color);
+            font-weight: bold;
+        }
+
+        .prompt-container {
+            background-color: var(--highlight-color);
+            border-left: 4px solid var(--accent-color);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .prompt-label {
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .response-container {
+            background-color: var(--code-background);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Creating a Stream Processing Function</h1>
+
+        <section class="section">
+            <h2>Problem Understanding</h2>
+            <p>Write a function that takes an iterator as input and processes its items, e.g., multiplying numbers by 2.</p>
+        </section>
+
+        <section class="section">
+            <h2>Approach & Methodology</h2>
+            <p>
+                - Test this with a range iterator.<br>
+                - Explain how stream processing can be applied to iterators.<br>
+                - Provide examples of using stream processing functions in practice.
+            </p>
+        </section>
+
+        <section class="section">
+            <h2>LLMs Used</h2>
+            <p>GPT-4 was used to assist in creating a stream processing function.</p>
+        </section>
+
+        <section class="section">
+            <h2>Prompts & Responses</h2>
+            <div class="prompt-container">
+                <div class="prompt-label">Prompt:</div>
+                <p>How can I create a stream processing function in Python?</p>
+            </div>
+            <div class="response-container">
+                <div class="prompt-label">Response:</div>
+                <p>Define a function that accepts an iterator and processes each item using a loop or comprehension.</p>
+            </div>
+            <div class="prompt-container">
+                <div class="prompt-label">Prompt:</div>
+                <p>What are the benefits of stream processing?</p>
+            </div>
+            <div class="response-container">
+                <div class="prompt-label">Response:</div>
+                <p>Stream processing allows for real-time data handling and can improve performance by processing data on-the-fly.</p>
+            </div>
+            <div class="prompt-container">
+                <div class="prompt-label">Prompt:</div>
+                <p>Can I use a generator as an input for my stream processing function?</p>
+            </div>
+            <div class="response-container">
+                <div class="prompt-label">Response:</div>
+                <p>Yes, generators are perfect for stream processing as they yield items one at a time, making them memory efficient.</p>
+            </div>
+        </section>
+    </div>
+</body>
+</html>
