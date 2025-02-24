@@ -52,3 +52,9 @@ queue2/
 
 # Ignore only api.py inside persistent_queue_system
 problem1/persistent_queue_system/persistent_queue_system/api.py
+
+
+# Ignore log files in the supervisor directory
+problem1/persistent_queue_system/supervisor/*.err.log
+problem1/persistent_queue_system/supervisor/*.out.log
+
