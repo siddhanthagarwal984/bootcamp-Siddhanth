@@ -1,19 +1,17 @@
 # Persistent Queue System
 
-📀 Overview
+## 📀 Overview
 
-This project implements a persistent producer-consumer queue using SQLite.
+This project implements a **persistent producer-consumer queue** using SQLite.
 
 It ensures:
 
-- Job persistence (jobs survive system restarts).
+- **Job persistence** (jobs survive system restarts).
+- **Multiple producers and consumers** can interact with the queue simultaneously.
+- **No duplicate processing** (a job is never processed twice).
+- **Failure handling** (failed jobs can be retried).
 
-- Multiple producers and consumers can interact with the queue simultaneously.
-
-- No duplicate processing (a job is never processed twice).
-
-- Failure handling (failed jobs can be retried).
-
+---
 
 ## 🎯 **Problem Description**
 
@@ -26,7 +24,7 @@ The system manages jobs that are:
 ---
 
 ## 🏗 **System Design**
-The architecture consists of 5 main components:
+The architecture consists of **4 main components**:
 
 | **Component**   | **Description** |
 |---------------|--------------------------------|
@@ -48,6 +46,7 @@ graph TD;
     Consumer2 -->|Processes| CompletedJobs;
     AdminConsole -->|Manages| Queue;
     OpsConsole -->|Monitors| Queue;
+```
 
 ## Usage Instructions
 
