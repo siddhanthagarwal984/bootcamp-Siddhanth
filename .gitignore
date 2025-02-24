@@ -23,3 +23,32 @@ Iterators-and-Streams/**/.pytest_cache/
 Iterators-and-Streams/**/.venv/
 Iterators-and-Streams/**/.vscode/
 Iterators-and-Streams/**/*.egg-info/
+
+
+# Ignore all project-specific `.pytest_cache` directories
+**/.pytest_cache/
+
+# Ignore all project-specific `.venv` directories
+**/.venv/
+
+# Ignore all project-specific `.vscode` directories
+**/.vscode/
+
+# Ignore all project-specific `*.egg-info` directories
+**/*.egg-info/
+
+# Ignore the jobs folder
+jobs/
+
+# Ignore database files
+*.db
+
+# Ignore system files
+.DS_Store
+Thumbs.db
+
+# Ignore queue2 directory
+queue2/
+
+# Ignore only api.py inside persistent_queue_system
+persistent_queue_system/api.py
