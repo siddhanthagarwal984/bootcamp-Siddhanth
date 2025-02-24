@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Persistent Queue System Documentation</title>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({startOnLoad:true});</script>
+    <style>
+        :root {
+
+            --primary-color: #2563eb;
+            --secondary-color: #1e40af;
+            --accent-color: #3b82f6;
+            --text-color: #1f2937;
+            --background-color: #f8fafc;
+            --code-background: #f1f5f9;
+            --border-color: #e2e8f0;
+            --section-background: #ffffff;
+            --highlight-color: #dbeafe;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.7;
+            color: var(--text-color);
+            background-color: var(--background-color);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .section {
+            background: var(--section-background);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            border: 1px solid var(--border-color);
+        }
+
+        h1, h2, h3 {
+            color: var(--primary-color);
+            line-height: 1.3;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            padding-bottom: 1rem;
+            border-bottom: 3px solid var(--accent-color);
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        h2::before {
+            content: "→";
+            color: var(--accent-color);
+            font-weight: bold;
+        }
+
+        .prompt-container {
+            background-color: var(--highlight-color);
+            border-left: 4px solid var(--accent-color);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .prompt-label {
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .response-container {
+            background-color: var(--code-background);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+
+        .llm-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .llm-item {
+            background: var(--highlight-color);
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .llm-icon {
+            background: var(--primary-color);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+
+            .section {
+                padding: 1.5rem;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --primary-color: #60a5fa;
+                --secondary-color: #93c5fd;
+                --accent-color: #3b82f6;
+                --text-color: #f1f5f9;
+                --background-color: #0f172a;
+                --code-background: #1e293b;
+                --border-color: #334155;
+                --section-background: #1e293b;
+                --highlight-color: #1e3a8a;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Persistent Queue System Documentation</h1>
+
+        <section class="section">
+            <h2>Problem Understanding</h2>
+            <p>
+                The Persistent Queue System addresses the following challenges:
+            </p>
+            <ul>
+                <li><strong>Persistence:</strong> Ensuring jobs survive system restarts</li>
+                <li><strong>Concurrency:</strong> Allowing multiple producers and consumers to interact with the queue simultaneously</li>
+                <li><strong>Reliability:</strong> Preventing duplicate processing of jobs</li>
+                <li><strong>Failure Handling:</strong> Automatic retries for failed jobs</li>
+            </ul>
+        </section>
+
+        <section class="section">
+            <h2>Approach & Methodology</h2>
+            <p>
+                The system uses SQLite for persistent storage and implements a producer-consumer model with:
+            </p>
+            <ul>
+                <li>Multiple producers submitting jobs</li>
+                <li>Multiple consumers processing jobs</li>
+                <li>Admin and Ops consoles for management and monitoring</li>
+                <li>Supervisor for process management</li>
+            </ul>
+        </section>
+
+        <section class="section">
+            <h2>System Design</h2>
+            <div class="prompt-container">
+                <div class="prompt-label">Architecture Diagram:</div>
+                <div class="mermaid">
+graph TD;
+    Producer1 -->|Submit Jobs| Queue;
+    Producer2 -->|Submit Jobs| Queue;
+    Queue -->|Assigns Jobs| Consumer1;
+    Queue -->|Assigns Jobs| Consumer2;
+    Consumer1 -->|Processes| CompletedJobs;
+    Consumer2 -->|Processes| CompletedJobs;
+    AdminConsole -->|Manages| Queue;
+    OpsConsole -->|Monitors| Queue;
+                </div>
+
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>Usage Instructions</h2>
+            <div class="response-container">
+                <div class="prompt-label">Start Components:</div>
+                <pre>
+# Start Producer
+poetry run python -m persistent_queue_system.producer
+
+# Start Consumer
+poetry run python -m persistent_queue_system.consumer
+
+# Start Admin Console
+poetry run streamlit run persistent_queue_system/admin.py
+
+# Start Ops Console
+poetry run streamlit run persistent_queue_system/ops.py
+                </pre>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>Features</h2>
+            <ul class="llm-list">
+                <li class="llm-item">
+                    <div class="llm-icon">P</div>
+                    <div>
+                        <strong>Persistent Storage</strong>
+                        <p>Jobs are stored in SQLite and survive system restarts</p>
+                    </div>
+                </li>
+                <li class="llm-item">
+                    <div class="llm-icon">C</div>
+                    <div>
+                        <strong>Concurrency</strong>
+                        <p>Supports multiple producers and consumers</p>
+                    </div>
+                </li>
+                <li class="llm-item">
+                    <div class="llm-icon">M</div>
+                    <div>
+                        <strong>Management Interfaces</strong>
+                        <p>Admin and Ops consoles for monitoring and control</p>
+                    </div>
+                </li>
+            </ul>
+        </section>
+
+        <section class="section">
+            <h2>Prompts & Answers</h2>
+            
+            <div class="prompt-container">
+                <div class="prompt-label">Q1: What is the purpose of the Persistent Queue System?</div>
+                <p>The system manages asynchronous job processing with persistence, ensuring jobs survive system restarts and are processed reliably.</p>
+            </div>
+
+            <div class="response-container">
+                <div class="prompt-label">Q2: How does the system prevent duplicate processing?</div>
+                <p>It uses SQLite's transaction capabilities to ensure each job is marked as 'processing' before being handled, preventing multiple consumers from processing the same job.</p>
+            </div>
+
+            <div class="prompt-container">
+                <div class="prompt-label">Q3: What happens when a job fails?</div>
+                <p>Failed jobs are retried up to a maximum number of attempts before being marked as permanently failed in the system.</p>
+            </div>
+
+            <div class="response-container">
+                <div class="prompt-label">Q4: How does the Admin Console help manage the system?</div>
+                <p>The Admin Console allows administrators to view job statuses, reprocess failed jobs, and cancel pending jobs as needed.</p>
+            </div>
+
+            <div class="prompt-container">
+                <div class="prompt-label">Q5: What is the role of Supervisor in this system?</div>
+                <p>Supervisor ensures continuous operation by automatically restarting producer and consumer processes if they crash.</p>
+            </div>
+
+            <div class="response-container">
+                <div class="prompt-label">Q6: How does the system handle concurrent access?</div>
+                <p>SQLite's write-ahead logging (WAL) mode enables multiple producers and consumers to interact with the queue simultaneously while maintaining data integrity.</p>
+            </div>
+        </section>
+    </div>
+</body>
+</html>
