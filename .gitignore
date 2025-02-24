@@ -51,4 +51,4 @@ Thumbs.db
 queue2/
 
 # Ignore only api.py inside persistent_queue_system
-persistent_queue_system/api.py
+problem1/persistent_queue_system/persistent_queue_system/api.py
