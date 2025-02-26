@@ -107,7 +107,7 @@ poetry run streamlit run persistent_queue_system/ops.py
 
 ## Design Decisions
 
-1. Why Choose SQLite for Persistence?
+### 1. Why Choose SQLite for Persistence?
 
 Durability:
 SQLite writes changes immediately to a file on disk. This means that once a job is enqueued, it’s stored on disk and remains there even if the process or system restarts. This inherent persistence makes SQLite a strong candidate for ensuring no job is lost.
@@ -124,7 +124,7 @@ While SQLite is excellent for moderate workloads and is well-suited for many sma
 Portability:
 Being file-based, SQLite is highly portable. The entire database is contained within a single file, making it easy to move or deploy across different environments without complex configuration. This simplicity greatly eases deployment and maintenance.
 
-2. Why Use Supervisor for Process Management?
+### 2. Why Use Supervisor for Process Management?
 
 Automatic Recovery:
 Supervisor monitors your processes (such as producers and consumers) and automatically restarts any process that crashes. This means that if a consumer dies unexpectedly, Supervisor will restart it, helping to keep the system running continuously.
@@ -141,7 +141,7 @@ Supervisor is lightweight and designed for process management. It introduces min
 Configuration:
 Supervisor’s configuration is straightforward and highly customizable. You can easily tailor it to suit your project’s needs—defining multiple instances of your producers and consumers, setting automatic restarts, and specifying log file locations—all within a simple configuration file.
 
-3. Logging & Debugging Strategies
+### 3. Logging & Debugging Strategies
 
 Producer Logs:
 Producer logs capture every job that is submitted to the queue. They are useful for verifying that jobs are being created as expected and for identifying any bottlenecks in job generation.
@@ -152,7 +152,7 @@ Consumer logs provide insights into job processing. They can help you detect err
 Supervisor Logs:
 Supervisor logs (both stdout and stderr) are essential for monitoring the overall health of your processes. They help diagnose crashes or repeated restarts and provide a centralized location for troubleshooting.
 
-4. Additional Design Decisions
+### 4. Additional Design Decisions
 
 Concurrency Handling:
 The system uses SQLite’s built-in locking mechanisms to handle concurrent access. Multiple producers can enqueue jobs concurrently, and when a consumer dequeues a job, the system updates its status immediately to prevent other consumers from processing it. This helps avoid race conditions.
@@ -184,23 +184,23 @@ The project is documented with clear, concise explanations of the system design,
 Compatibility:
 SQLite’s file-based nature and the use of Python (with packages like Poetry) ensure that the system is highly portable and compatible across different operating systems and environments (e.g., Windows, Linux, macOS).
 
-5. Who handles job resubmission?
+### 5. Who handles job resubmission?
 
 The Manager component is designed to automatically detect jobs that have been “processing” for too long (which may indicate a consumer crash) and then resubmit them by re-adding them to the queue. Additionally, the Admin Console allows an administrator to manually trigger resubmission if needed.
 
-6. How do you know if a consumer dies?
+### 6. How do you know if a consumer dies?
 
 The system uses a timeout-based approach. When a job is marked as “processing,” a timestamp is recorded. If a job remains in that state for longer than a predefined threshold, it is assumed that the consumer handling that job has died, triggering the resubmission process.
 
-7. How does the system support multiple producers and consumers?
+### 7. How does the system support multiple producers and consumers?
 
 All producers and consumers connect to the same SQLite database. When a producer submits a job, it gets added to the shared queue. When a consumer dequeues a job, the system marks it as “processing” immediately to prevent other consumers from taking it. This coordinated access ensures each job is processed only once, even when multiple processes are running concurrently.
 
-8. What happens if a producer crashes while submitting a job?
+### 8. What happens if a producer crashes while submitting a job?
 
 If a producer crashes while submitting a job, the job will be partially inserted into the database.
 
-9. How does the system handle job failures?
+### 9. How does the system handle job failures?
 
 Automatic Retry & Failure Counting:
 When a job is picked up by a consumer and an error occurs during processing, the system increments an attempt counter for that job. If the job fails repeatedly—exceeding a predefined maximum number of attempts—it is then marked as "failed" so that it won’t be retried indefinitely.
@@ -211,7 +211,7 @@ If a consumer crashes or becomes unresponsive after picking up a job, the job re
 Manual Intervention:
 Administrators can also use the Admin Console to manually review jobs that are stuck or have failed. They have the option to resubmit or cancel these jobs based on the situation.
 
-10. How are logs managed in the system?
+### 10. How are logs managed in the system?
 
 Each component (producer, consumer, etc.) writes its logs to separate files, and Supervisor collects these logs. This centralized logging helps in tracking what happens during job submission, processing, and any failures, making debugging and monitoring much easier.
 
