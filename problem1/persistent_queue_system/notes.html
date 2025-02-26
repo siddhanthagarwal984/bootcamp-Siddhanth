@@ -5,10 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Persistent Queue System Documentation</title>
     <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
-    <script>mermaid.initialize({startOnLoad:true});</script>
+    <script>
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'neutral'
+        });
+    </script>
     <style>
         :root {
-
             --primary-color: #2563eb;
             --secondary-color: #1e40af;
             --accent-color: #3b82f6;
@@ -75,12 +79,27 @@
             font-weight: bold;
         }
 
+        h3 {
+            font-size: 1.4rem;
+            margin: 1.5rem 0 1rem 0;
+            color: var(--secondary-color);
+        }
+
         .prompt-container {
             background-color: var(--highlight-color);
             border-left: 4px solid var(--accent-color);
             padding: 1.5rem;
             margin: 1.5rem 0;
             border-radius: 0 8px 8px 0;
+        }
+
+        /* New class for diagram containers with transparent background */
+        .diagram-container {
+            border-left: 4px solid var(--accent-color);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 8px 8px 0;
+            background-color: transparent;
         }
 
         .prompt-label {
@@ -124,6 +143,24 @@
             font-weight: bold;
         }
 
+        .explanation-list {
+            margin-left: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .explanation-list li {
+            margin-bottom: 0.5rem;
+        }
+
+        /* Mermaid diagram specific styles */
+        .mermaid {
+            background-color: white;
+            padding: 1rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin: 1rem 0;
+        }
+
         @media (max-width: 768px) {
             .container {
                 padding: 1rem;
@@ -153,6 +190,12 @@
                 --border-color: #334155;
                 --section-background: #1e293b;
                 --highlight-color: #1e3a8a;
+            }
+            
+            /* Ensure Mermaid diagrams are visible in dark mode */
+            .mermaid {
+                background-color: #f5f5f5;
+                color: #333;
             }
         }
     </style>
@@ -189,21 +232,67 @@
 
         <section class="section">
             <h2>System Design</h2>
-            <div class="prompt-container">
+            <!-- Changed from prompt-container to diagram-container -->
+            <div class="diagram-container">
                 <div class="prompt-label">Architecture Diagram:</div>
                 <div class="mermaid">
-graph TD;
-    Producer1 -->|Submit Jobs| Queue;
-    Producer2 -->|Submit Jobs| Queue;
-    Queue -->|Assigns Jobs| Consumer1;
-    Queue -->|Assigns Jobs| Consumer2;
-    Consumer1 -->|Processes| CompletedJobs;
-    Consumer2 -->|Processes| CompletedJobs;
-    AdminConsole -->|Manages| Queue;
-    OpsConsole -->|Monitors| Queue;
+flowchart TB;
+    Producer(Producer) --> EnqueueJob[Enqueue Job]
+    EnqueueJob --> PersistentQueue[Persistent Queue]
+    PersistentQueue --> DequeueJob[Dequeue Job]
+    DequeueJob --> Consumer(Consumer)
+    Consumer --> ProcessJob[Process Job]
+    ProcessJob --> MarkDone[Mark as Done]
+    ProcessJob --> MarkFailed[Mark as Failed]
+    PersistentQueue --> ResubmitJob[Resubmit Job]
+    PersistentQueue --> CancelJob[Cancel Job]
+    ResubmitJob --> PersistentQueue[PersistentQueue]
+    CancelJob --> PersistentQueue[PersistentQueue]
+    MarkFailed --> PersistentQueue[PersistentQueue]
                 </div>
-
             </div>
+            
+            <h3>Explanation of the Flowchart</h3>
+            <p>The flowchart illustrates the core components and their relationships in the Persistent Queue System:</p>
+            <ul class="explanation-list">
+                <li><strong>Producer to Queue:</strong> Producers create and enqueue jobs into the persistent queue</li>
+                <li><strong>Queue to Consumer:</strong> Consumers dequeue jobs from the queue for processing</li>
+                <li><strong>Processing Outcomes:</strong> After processing, jobs are either marked as done or failed</li>
+                <li><strong>Job Management:</strong> Failed jobs can be resubmitted or cancelled through the queue</li>
+                <li><strong>Feedback Loop:</strong> The system maintains a complete feedback loop to ensure all jobs reach their final state</li>
+            </ul>
+            <p>This architecture ensures jobs remain in the system until they are successfully processed or explicitly cancelled, providing reliability and resilience.</p>
+        </section>
+
+        <section class="section">
+            <h2>Sequence Diagram</h2>
+            <p>
+                The <strong>sequence diagram</strong> highlights step-by-step interactions among the main components:
+            </p>
+            <!-- Changed from prompt-container to diagram-container -->
+            <div class="diagram-container">
+                <div class="prompt-label">Component Interactions:</div>
+                <div class="mermaid">
+sequenceDiagram
+    autonumber
+    Producer->>+Queue: Submit Job (file path)
+    Queue-->>-Consumer: Dequeue Job
+    Consumer->>File: Process (add timestamp)
+    Consumer->>Queue: Mark Complete
+    Manager->>Queue: Resubmit/Cancel (if needed)
+    Ops-->>Queue: Monitor Status
+                </div>
+            </div>
+            
+            <h3>Explanation of the Sequence Diagram</h3>
+            <ol class="explanation-list">
+                <li><strong>Producer</strong> sends a new job (e.g., a file path) to the <strong>Queue</strong>.</li>
+                <li><strong>Queue</strong> then provides the job to an available <strong>Consumer</strong> (when the consumer dequeues).</li>
+                <li><strong>Consumer</strong> modifies the <strong>File</strong> (e.g., appending timestamps).</li>
+                <li><strong>Consumer</strong> informs the <strong>Queue</strong> when the job is complete (status becomes <code>done</code>).</li>
+                <li><strong>Manager</strong> (or Admin Console) can instruct the <strong>Queue</strong> to <strong>resubmit</strong> or <strong>cancel</strong> jobs if needed.</li>
+                <li><strong>Ops</strong> (Ops Console) queries the <strong>Queue</strong> for real-time job statuses.</li>
+            </ol>
         </section>
 
         <section class="section">

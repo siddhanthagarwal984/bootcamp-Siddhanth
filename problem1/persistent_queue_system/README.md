@@ -30,23 +30,29 @@ The architecture consists of **4 main components**:
 |---------------|--------------------------------|
 | **Producers** | Submit jobs to the queue. |
 | **Consumers** | Process jobs from the queue. |
-| **Admin Console** | Manage job reprocessing and cancellation. |
-| **Ops Console** | View job statuses & monitor queue performance. |
+| **Admin Console** | Allows administrators to reprocess failed jobs, cancel pending jobs, and manage queue settings. |
+| **Ops Console** | Provides real-time monitoring of job statuses, queue performance metrics, and system health. |
 
 ---
 
 ## 📊 **Architecture Diagram**
+
 ```mermaid
-graph TD;
-    Producer1 -->|Submit Jobs| Queue;
-    Producer2 -->|Submit Jobs| Queue;
-    Queue -->|Assigns Jobs| Consumer1;
-    Queue -->|Assigns Jobs| Consumer2;
-    Consumer1 -->|Processes| CompletedJobs;
-    Consumer2 -->|Processes| CompletedJobs;
-    AdminConsole -->|Manages| Queue;
-    OpsConsole -->|Monitors| Queue;
+flowchart TB;
+    Producer(Producer) --> EnqueueJob[Enqueue Job]
+    EnqueueJob --> PersistentQueue[Persistent Queue]
+    PersistentQueue --> DequeueJob[Dequeue Job]
+    DequeueJob --> Consumer(Consumer)
+    Consumer --> ProcessJob[Process Job]
+    ProcessJob --> MarkDone[Mark as Done]
+    ProcessJob --> MarkFailed[Mark as Failed]
+    PersistentQueue --> ResubmitJob[Resubmit Job]
+    PersistentQueue --> CancelJob[Cancel Job]
+    ResubmitJob --> PersistentQueue[PersistentQueue]
+    CancelJob --> PersistentQueue[PersistentQueue]
+    MarkFailed --> PersistentQueue[PersistentQueue]
 ```
+
 
 ## Usage Instructions
 

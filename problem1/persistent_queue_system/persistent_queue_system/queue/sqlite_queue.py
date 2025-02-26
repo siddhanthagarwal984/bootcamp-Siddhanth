@@ -1,11 +1,20 @@
 import sqlite3
 import time
+from persistent_queue_system.db import get_db_connection
 from .base import PersistentQInterface
 
+
+
+# class PersistentQSQLite(PersistentQInterface):
+#     def __init__(self, db_path="queue.db"):
+#         self.conn = sqlite3.connect(db_path, check_same_thread=False)
+#         self._create_table()
+
 class PersistentQSQLite(PersistentQInterface):
-    def __init__(self, db_path="queue.db"):
-        self.conn = sqlite3.connect(db_path, check_same_thread=False)
+    def __init__(self):
+        self.conn = get_db_connection()
         self._create_table()
+
 
     def _create_table(self):
         """Initialize the queue table."""

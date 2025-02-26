@@ -1,3 +1,4 @@
+from persistent_queue_system.db import get_db_connection
 import streamlit as st
 import sqlite3
 import pandas as pd
@@ -6,7 +7,8 @@ DB_PATH = "supervisor/queue.db"
 
 def get_jobs():
     """Fetch all jobs from the database"""
-    conn = sqlite3.connect(DB_PATH)
+    #conn = sqlite3.connect(DB_PATH)
+    conn = get_db_connection()
     query = "SELECT id, job_id, status, created_at FROM jobs ORDER BY created_at DESC"
     jobs_df = pd.read_sql_query(query, conn)
     conn.close()
