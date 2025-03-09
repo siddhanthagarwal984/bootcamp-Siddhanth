@@ -57,4 +57,10 @@ problem1/persistent_queue_system/persistent_queue_system/api.py
 # Ignore log files in the supervisor directory
 problem1/persistent_queue_system/supervisor/*.err.log
 problem1/persistent_queue_system/supervisor/*.out.log
+problem1_new/persistent_queue_system/logs
 
+# Ignore all files in the tests directory
+problem1_new/persistent_queue_system/tests
+
+# Ignore all files in the poetry.lock
+poetry.lock
