@@ -78,22 +78,22 @@ The Persistent Queue System addresses several critical challenges in distributed
 
 ```mermaid
 flowchart TB
-    subgraph P[Producer<br/>(producer.py)]
+    subgraph P["Producer (producer.py)"]
         A[Generate Job File]
     end
-    subgraph Q[SQLite Queue<br/>(PersistentQSQLite)]
+    subgraph Q["SQLite Queue (PersistentQSQLite)"]
         B[Jobs Table]
     end
-    subgraph C[Consumer<br/>(consumer.py)]
-        D[Process Job<br/>(append timestamp)]
+    subgraph C["Consumer (consumer.py)"]
+        D["Process Job (append timestamp)"]
     end
-    subgraph M[Manager<br/>(manager.py)]
+    subgraph M["Manager (manager.py)"]
         E[Monitor & Resubmit Stalled Jobs]
     end
-    subgraph Admin[Admin Console<br/>(admin.py)]
+    subgraph Admin["Admin Console (admin.py)"]
         F[Job Management & Stats]
     end
-    subgraph Ops[Ops Console<br/>(ops.py)]
+    subgraph Ops["Ops Console (ops.py)"]
         G[Real-time Monitoring]
     end
 
@@ -125,13 +125,13 @@ This diagram illustrates the detailed flow when a job fails during processing an
 
 ```mermaid
 flowchart TD
-    A[Job Enqueued (pending)] --> B[Dequeued for Processing (processing)]
-    B --> C{Processing Outcome?}
-    C -- Success --> D[Mark as done]
-    C -- Failure --> E[Increment Attempt Count]
-    E --> F{Attempts < Max?}
-    F -- Yes --> G[Requeue Job (pending)]
-    F -- No --> H[Mark as permanently_failed]
+    A["Job Enqueued (pending)"] --> B["Dequeued for Processing (processing)"]
+    B --> C{"Processing Outcome?"}
+    C -- Success --> D["Mark as done"]
+    C -- Failure --> E["Increment Attempt Count"]
+    E --> F{"Attempts < Max?"}
+    F -- Yes --> G["Requeue Job (pending)"]
+    F -- No --> H["Mark as permanently_failed"]
 ```
 Explanation:
 - A → B: A job moves from the pending queue to processing.
